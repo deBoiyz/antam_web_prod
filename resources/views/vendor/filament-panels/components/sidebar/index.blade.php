@@ -97,9 +97,38 @@
     </div>
 
     <nav
-        class="fi-sidebar-nav flex-grow flex flex-col gap-y-7 overflow-y-auto overflow-x-hidden px-6 py-8"
+        class="fi-sidebar-nav flex-grow flex flex-col gap-y-7 overflow-y-auto overflow-x-hidden px-6 py-8 fi-sidebar-scroll"
         style="scrollbar-gutter: stable"
     >
+
+        <style>
+            .fi-sidebar-scroll {
+                scrollbar-width: thin;
+                scrollbar-color: rgba(156, 163, 175, 0.4) transparent;
+            }
+            .fi-sidebar-scroll::-webkit-scrollbar {
+                width: 4px;
+            }
+            .fi-sidebar-scroll::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            .fi-sidebar-scroll::-webkit-scrollbar-thumb {
+                background-color: rgba(156, 163, 175, 0.3);
+                border-radius: 9999px;
+            }
+            .fi-sidebar-scroll::-webkit-scrollbar-thumb:hover {
+                background-color: rgba(156, 163, 175, 0.6);
+            }
+            .dark .fi-sidebar-scroll {
+                scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+            }
+            .dark .fi-sidebar-scroll::-webkit-scrollbar-thumb {
+                background-color: rgba(255, 255, 255, 0.15);
+            }
+            .dark .fi-sidebar-scroll::-webkit-scrollbar-thumb:hover {
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+        </style>
         {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::SIDEBAR_NAV_START) }}
 
         @if (filament()->hasTenancy() && filament()->hasTenantMenu())

@@ -16,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 // Bot Configuration
 Route::prefix('config')->group(function () {
     Route::get('/websites', [BotConfigController::class, 'getAllConfigs']);
-    Route::get('/websites/{id}', [BotConfigController::class, 'getWebsiteConfig']);
+    Route::get('/websites/all', [BotConfigController::class, 'getAllConfigsIncludingInactive']);
+    Route::get('/websites/{id}', [BotConfigController::class, 'getWebsiteConfig'])->where('id', '[0-9]+');
+    Route::get('/websites/slug/{slug}', [BotConfigController::class, 'getWebsiteConfigBySlug']);
     Route::get('/captcha-services', [BotConfigController::class, 'getCaptchaServices']);
     Route::get('/proxies', [BotConfigController::class, 'getProxies']);
 });
@@ -44,6 +46,7 @@ Route::prefix('logs')->group(function () {
 Route::prefix('sessions')->group(function () {
     Route::get('/active', [SessionController::class, 'getActive']);
     Route::post('/register', [SessionController::class, 'register']);
+    Route::post('/cleanup-stale', [SessionController::class, 'cleanupStale']);
     Route::post('/{sessionId}/status', [SessionController::class, 'updateStatus']);
     Route::post('/{sessionId}/completion', [SessionController::class, 'recordCompletion']);
     Route::post('/{sessionId}/heartbeat', [SessionController::class, 'heartbeat']);

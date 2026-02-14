@@ -68,5 +68,15 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->command->info('Default settings created');
+
+    
+        // Run mock web target seeder
+        $this->call([
+            MockWebTargetSeeder::class,
+            MockDataEntriesSeeder::class,
+            MockBintaroWebTargetSeeder::class,
+            MockSerpongWebTargetSeeder::class,
+            MockButikDataEntriesSeeder::class,
+        ]);
     }
 }

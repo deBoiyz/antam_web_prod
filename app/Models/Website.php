@@ -90,9 +90,19 @@ class Website extends Model
         return $this->dataEntries()->where('status', 'failed')->count();
     }
 
+    public function getQueuedEntriesCountAttribute(): int
+    {
+        return $this->dataEntries()->where('status', 'queued')->count();
+    }
+
     public function getProcessingEntriesCountAttribute(): int
     {
-        return $this->dataEntries()->whereIn('status', ['queued', 'processing'])->count();
+        return $this->dataEntries()->where('status', 'processing')->count();
+    }
+
+    public function getCancelledEntriesCountAttribute(): int
+    {
+        return $this->dataEntries()->where('status', 'cancelled')->count();
     }
 
     public function getFullConfigAttribute(): array

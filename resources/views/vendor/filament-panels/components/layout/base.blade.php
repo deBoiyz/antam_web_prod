@@ -58,6 +58,9 @@
         {{ filament()->getTheme()->getHtml() }}
         {{ filament()->getFontHtml() }}
 
+        {{-- Load custom Tailwind v4 styles for custom blade pages --}}
+        @vite(['resources/css/app.css'])
+
         <style>
             :root {
                 --font-family: '{!! filament()->getFontFamily() !!}';
